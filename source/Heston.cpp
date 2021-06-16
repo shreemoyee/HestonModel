@@ -27,7 +27,7 @@ void HestonEuler::calc_spot_path(const std::vector<double>& spot_draws,
   double dt = pOption->T/static_cast<double>(vec_size);
 
   // Create the spot price path making use of the volatility
-  // path. Uses a similar Euler Truncation method to the vol path.
+  // path. Uses Euler Truncation method to the vol path.
   for (int i=1; i<vec_size; i++) {
     double v_max = std::max(vol_path[i-1], 0.0);
     spot_path[i] = spot_path[i-1] * exp( (pOption->r - 0.5*v_max)*dt +
