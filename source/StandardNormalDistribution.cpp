@@ -86,7 +86,7 @@ void StandardNormalDistribution::random_draws(const std::vector<double>& uniform
     return;
   }
 
-  // Slow, but easy to implement
+  // Slow
   for (int i=0; i<uniform_draws.size() / 2; i++) {
     dist_draws[2*i] = sqrt(-2.0*log(uniform_draws[2*i])) * sin(2*M_PI*uniform_draws[2*i+1]);
     dist_draws[2*i+1] = sqrt(-2.0*log(uniform_draws[2*i])) * cos(2*M_PI*uniform_draws[2*i+1]);

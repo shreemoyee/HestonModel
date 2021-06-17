@@ -17,7 +17,7 @@ class AsianOption {
          double _T, PayOffPtr pay_off_);
   virtual ~AsianOption() {};
 
-  // Pure virtual pay-off operator (this will determine arithmetic or geometric)
+  // Pure virtual pay-off operator
   virtual double pay_off_price(const std::vector<double>& spot_prices) const = 0;
 };
 

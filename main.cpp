@@ -40,9 +40,6 @@ void generate_normal_correlation_paths(double rho,
 }
 
 int main(int argc, char **argv) {
-  // First we create the parameter list
-  // Note that you could easily modify this code to input the parameters
-  // either from the command line or via a file
   unsigned num_sims = 500;   // Number of simulated asset paths
 
 
@@ -74,14 +71,12 @@ int main(int argc, char **argv) {
   MyFile << "Number simulations" << "," << "Option price" << "," << "Time to run (milli seconds)" <<std::endl;
   while(num_sims<300000){
 
-  // Create the spot and vol initial normal and price paths
   std::vector<double> spot_draws(num_intervals, 0.0);  // Vector of initial spot normal draws
   std::vector<double> vol_draws(num_intervals, 0.0);   // Vector of initial correlated vol normal draws
   std::vector<double> spot_prices(num_intervals, S_0);  // Vector of initial spot prices
   std::vector<double> vol_prices(num_intervals, v_0);   // Vector of initial vol prices
 
   std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-  // Monte Carlo options pricing
   double payoff_sum = 0.0;
   for (unsigned i=0; i<num_sims; i++) {
     generate_normal_correlation_paths(rho, spot_draws, vol_draws);
@@ -114,7 +109,6 @@ int main(int argc, char **argv) {
   MyFile2 << "Number time steps" << "," << "Option price" << "," << "Time to run (milli seconds)" <<std::endl;
   num_sims = 5000;
   while(num_intervals<10000){
-  // Create the spot and vol initial normal and price paths
   std::vector<double> spot_draws(num_intervals, 0.0);  // Vector of initial spot normal draws
   std::vector<double> vol_draws(num_intervals, 0.0);   // Vector of initial correlated vol normal draws
   std::vector<double> spot_prices(num_intervals, S_0);  // Vector of initial spot prices
@@ -150,7 +144,6 @@ int main(int argc, char **argv) {
 
   std::vector<double> volatilities {0.2, 0.25, 0.4, 0.5, 0.6};
   for(auto vol: volatilities){
-    // Create the spot and vol initial normal and price paths
   std::vector<double> spot_draws(num_intervals, 0.0);  // Vector of initial spot normal draws
   std::vector<double> vol_draws(num_intervals, 0.0);   // Vector of initial correlated vol normal draws
   std::vector<double> spot_prices(num_intervals, S_0);  // Vector of initial spot prices

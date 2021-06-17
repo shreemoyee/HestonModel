@@ -32,7 +32,21 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Asian.h" />
+		<Unit filename="include/CorrelatedWiener.h" />
+		<Unit filename="include/Heston.h" />
+		<Unit filename="include/PathGeneration.h" />
+		<Unit filename="include/Payoff.h" />
+		<Unit filename="include/StandardNormalDistribution.h" />
+		<Unit filename="include/StatisticalDistributions.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="source/Asian.cpp" />
+		<Unit filename="source/CorrelatedWiener.cpp" />
+		<Unit filename="source/Heston.cpp" />
+		<Unit filename="source/PathGeneration.cpp" />
+		<Unit filename="source/Payoff.cpp" />
+		<Unit filename="source/StandardNormalDistribution.cpp" />
+		<Unit filename="source/StatisticalDistributions.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

@@ -17,12 +17,12 @@ void CorrelatedWiener::random_draws(const std::vector<double>& uniform_draws,
                             std::vector<double>& dist_draws) {
 
   if (uniform_draws.size() != dist_draws.size()) {
-    std::cout << "Draws vectors are of unequal size in standard normal dist." << std::endl;
+    std::cout << "Unequal sizes not acceptable." << std::endl;
     return;
   }
 
   if (uniform_draws.size() % 2 != 0) {
-    std::cout << "Uniform draw vector size not an even number." << std::endl;
+    std::cout << "Uniform draw size not an even number." << std::endl;
     return;
   }
 
