@@ -28,7 +28,7 @@ class AsianOptionArithmetic : public AsianOption {
   virtual ~AsianOptionArithmetic() {};
 
   // Override the pure virtual function to produce arithmetic Asian Options
-  virtual double pay_off_price(const std::vector<double>& spot_prices) const;
+  virtual double pay_off_price(const std::vector<double>& spot_prices) const override;
 };
 
 class AsianOptionGeometric : public AsianOption {
@@ -38,7 +38,7 @@ class AsianOptionGeometric : public AsianOption {
   virtual ~AsianOptionGeometric() {};
 
   // Overide the pure virtual function to produce geometric Asian Options
-  virtual double pay_off_price(const std::vector<double>& spot_prices) const;
+  virtual double pay_off_price(const std::vector<double>& spot_prices) const override;
 };
 
 #endif

@@ -69,7 +69,7 @@ int main(int argc, char **argv) {
   std::cout<<"#1 \n";
   std::ofstream MyFile("simlations.csv");
   MyFile << "Number simulations" << "," << "Option price" << "," << "Time to run (milli seconds)" <<std::endl;
-  while(num_sims<300000){
+  while(num_sims<1000000){
 
   std::vector<double> spot_draws(num_intervals, 0.0);  // Vector of initial spot normal draws
   std::vector<double> vol_draws(num_intervals, 0.0);   // Vector of initial correlated vol normal draws
@@ -82,22 +82,21 @@ int main(int argc, char **argv) {
     generate_normal_correlation_paths(rho, spot_draws, vol_draws);
     hest_euler.calc_vol_path(vol_draws, vol_prices);
     hest_euler.calc_spot_path(spot_draws, vol_prices, spot_prices);
-    payoff_sum += pOption->pay_off->operator()(spot_prices[num_intervals-1]);
+    payoff_sum += pOption->pay_off_price(spot_prices); //Made correction here, changed from pOption->pay_off->operator()(spot_prices[num_intervals-1]);
   }
   double option_price = (payoff_sum / static_cast<double>(num_sims)) * exp(-r*T);
 
   std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
   auto time = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
   MyFile << num_sims << "," << option_price << "," << time <<std::endl;
-  if(num_sims%1000==0){
+  if(num_sims%5000==0){
   std::cout<<"Running for "<<num_sims <<" number of paths\n";
   std::cout << "Option Price: " << option_price << std::endl;
-  }
+ }
   sims_price[num_sims] = option_price;
-  num_sims += 1000;
+  num_sims += 5000;
   }
   MyFile.close();
-
 
   //-------------------------------------------------------------------------------------------------------------------------
   //-------------------------------------------------------------------------------------------------------------------------
@@ -119,7 +118,7 @@ int main(int argc, char **argv) {
     generate_normal_correlation_paths(rho, spot_draws, vol_draws);
     hest_euler.calc_vol_path(vol_draws, vol_prices);
     hest_euler.calc_spot_path(spot_draws, vol_prices, spot_prices);
-    payoff_sum += pOption->pay_off->operator()(spot_prices[num_intervals-1]);
+    payoff_sum += pOption->pay_off_price(spot_prices); //Made correction here, changed from  pOption->pay_off->operator()(spot_prices[num_intervals-1]);
   }
   double option_price = (payoff_sum / static_cast<double>(num_sims)) * exp(-r*T);
   std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
@@ -128,7 +127,7 @@ int main(int argc, char **argv) {
   auto time2 = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
   std::cout << "Time taken: " << time2 <<" milli seconds"<< std::endl;
   MyFile2 << num_intervals << "," << option_price << "," << time2 <<std::endl;
-  num_intervals += 100;
+  num_intervals += 400;
   }
   MyFile2.close();
 
@@ -154,7 +153,7 @@ int main(int argc, char **argv) {
     generate_normal_correlation_paths(rho, spot_draws, vol_draws);
     hest_euler.calc_vol_path(vol_draws, vol_prices);
     hest_euler.calc_spot_path(spot_draws, vol_prices, spot_prices);
-    payoff_sum += pOption->pay_off->operator()(spot_prices[num_intervals-1]);
+    payoff_sum += pOption->pay_off_price(spot_prices); //Made correction here, changed from pOption->pay_off->operator()(spot_prices[num_intervals-1]);
   }
   double option_price = (payoff_sum / static_cast<double>(num_sims)) * exp(-r*T);
   std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
@@ -176,7 +175,7 @@ int main(int argc, char **argv) {
   double payoff_sum = 0.0;
   for (int i=0; i<num_sims; i++) {
     calc_path_spot_prices(spot_prices, r, v_0, T);
-    payoff_sum += pOption->pay_off->operator()(spot_prices[num_intervals-1]);
+    payoff_sum += pOption->pay_off_price(spot_prices); //Made correction here from, pOption->pay_off->operator()(spot_prices[num_intervals-1]);
   }
   double discount_payoff_avg = (payoff_sum / static_cast<double>(num_sims)) * exp(-r*T);
   std::cout << "Option price considering const volatility of: "<< v_0 << " is: " << discount_payoff_avg << std::endl;

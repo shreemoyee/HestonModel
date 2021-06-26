@@ -1,5 +1,5 @@
 #include "../include/Payoff.h"
-
+#include <iostream>
 PayOff::PayOff() {}
 
 PayOffCall::PayOffCall(const double& K_) { K = K_; }
